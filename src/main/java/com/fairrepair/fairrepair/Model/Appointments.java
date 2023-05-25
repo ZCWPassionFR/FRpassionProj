@@ -28,11 +28,11 @@ public class Appointments implements Serializable {
     private LocalDate timeSlot;
 
     @ManyToOne
-    private Shop shop;
+    private Shops shop;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "user", "vehicles", "appointments" }, allowSetters = true)
-    private UserProfile userProfile;
+    private User userProfile;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -62,28 +62,28 @@ public class Appointments implements Serializable {
         this.timeSlot = timeSlot;
     }
 
-    public Shop getShop() {
+    public Shops getShop() {
         return this.shop;
     }
 
-    public void setShop(Shop shop) {
+    public void setShop(Shops shop) {
         this.shop = shop;
     }
 
-    public Appointments shop(Shop shop) {
+    public Appointments shop(Shops shop) {
         this.setShop(shop);
         return this;
     }
 
-    public UserProfile getUserProfile() {
+    public User getUserProfile() {
         return this.userProfile;
     }
 
-    public void setUserProfile(UserProfile userProfile) {
+    public void setUserProfile(User userProfile) {
         this.userProfile = userProfile;
     }
 
-    public Appointments userProfile(UserProfile userProfile) {
+    public Appointments userProfile(User userProfile) {
         this.setUserProfile(userProfile);
         return this;
     }

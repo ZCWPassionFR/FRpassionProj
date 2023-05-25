@@ -1,6 +1,5 @@
 package com.fairrepair.fairrepair.model;
 
-import com.zcpassionfr.domain.enumeration.Service;
 import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
@@ -13,7 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "shop")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class Shop implements Serializable {
+public class Shops {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,9 +34,8 @@ public class Shop implements Serializable {
     @Column(name = "fair_repair_rating")
     private Integer fairRepairRating;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "services")
-    private Service services;
+    private VehicleService services;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -45,7 +43,7 @@ public class Shop implements Serializable {
         return this.id;
     }
 
-    public Shop id(Long id) {
+    public Shops id(Long id) {
         this.setId(id);
         return this;
     }
@@ -58,7 +56,7 @@ public class Shop implements Serializable {
         return this.name;
     }
 
-    public Shop name(String name) {
+    public Shops name(String name) {
         this.setName(name);
         return this;
     }
@@ -71,7 +69,7 @@ public class Shop implements Serializable {
         return this.phoneNumber;
     }
 
-    public Shop phoneNumber(String phoneNumber) {
+    public Shops phoneNumber(String phoneNumber) {
         this.setPhoneNumber(phoneNumber);
         return this;
     }
@@ -84,7 +82,7 @@ public class Shop implements Serializable {
         return this.address;
     }
 
-    public Shop address(String address) {
+    public Shops address(String address) {
         this.setAddress(address);
         return this;
     }
@@ -97,7 +95,7 @@ public class Shop implements Serializable {
         return this.fairRepairRating;
     }
 
-    public Shop fairRepairRating(Integer fairRepairRating) {
+    public Shops fairRepairRating(Integer fairRepairRating) {
         this.setFairRepairRating(fairRepairRating);
         return this;
     }
@@ -106,50 +104,53 @@ public class Shop implements Serializable {
         this.fairRepairRating = fairRepairRating;
     }
 
-    public Service getServices() {
+    public VehicleService getServices() {
         return this.services;
     }
 
-    public Shop services(Service services) {
+    public Shops services(VehicleService services) {
         this.setServices(services);
         return this;
     }
 
-    public void setServices(Service services) {
+    public void setServices(VehicleService services) {
         this.services = services;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
-    // 
+    //
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Shop)) {
+        if (!(o instanceof Shops)) {
             return false;
         }
-        return id != null && id.equals(((Shop) o).id);
+        return id != null && id.equals(((Shops) o).id);
     }
 
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return
-        // getClass().hashCode();
-    }
+    // @Override
+    // public int hashCode() {
+    // // see
+    // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+    // return
+    // // getClass().hashCode();
+    // }
 
     // prettier-ignore
-    @Override
-    public String toString() {
-        return "Shop{" +
-            "id=" + getI
-                ", name='" + getN
-                ", phoneNumber='" + getPhoneNu
-                ", address='" + getAddress() + "'" +
-                ", fairRepairRating=" + getFairRepai
-                ", services='" + getServices() + "'" +
-                "}";
-                
+    // @Override
+    // public String toString() {
+    // return "Shop{" +
+    // "id=" + getI
+    // ", name='" + getN
+    // ", phoneNumber='" + getPhoneNu
+    // ", address='" + getAddress() + "'" +
+    // ", fairRepairRating=" + getFairRepai
+    // ", services='" + getServices() + "'" +
+    // "}";
+
+    // }
 }

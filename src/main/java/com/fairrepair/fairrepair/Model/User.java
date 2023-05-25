@@ -1,7 +1,8 @@
 package com.fairrepair.fairrepair.model;
 
+import com.fairrepair.fairrepair.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.zcpassionfr.config.Constants;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -12,10 +13,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A user.
@@ -23,7 +24,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "jhi_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class User extends AbstractAuditingEntity<Long> implements Serializable {
+public class User {
 
     private static final long serialVersionUID = 1L;
 
@@ -82,14 +83,16 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "jhi_user_authority", joinColumns = {
-            @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
-                    @JoinColumn(name = "authority_name", referencedColumnName = "name") })
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @BatchSize(size = 20)
-    private Set<Authority> authorities = new HashSet<>();
+    // @JsonIgnore
+    // any
+    //
+    // = "jhi_user_authority", joinColumns = {
+    // @JoinColumn(name = "user_id", referencedColumnName = "id") },
+    // inverseJoinColumns = {
+    // @JoinColumn(name = "authority_name", referencedColumnName = "name") })
+    // acheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    // @BatchSize(size = 20)
+    // private Set<Authority> authorities = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -188,13 +191,13 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
         this.langKey = langKey;
     }
 
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
+    // public Set<Authority> getAuthorities() {
+    // return authorities;
+    // }
 
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
+    // public void setAuthorities(Set<Authority> authorities) {
+    // this.authorities = authorities;
+    // }
 
     @Override
     public boolean equals(Object o) {

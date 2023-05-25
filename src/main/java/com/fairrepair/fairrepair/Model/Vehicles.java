@@ -41,11 +41,11 @@ public class Vehicles implements Serializable {
     @JsonIgnoreProperties(value = { "shop", "userProfile" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
-    private Appointment appointment;
+    private Appointments appointment;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "user", "vehicles", "appointments" }, allowSetters = true)
-    private UserProfile userProfile;
+    private User userProfile;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -53,7 +53,7 @@ public class Vehicles implements Serializable {
         return this.id;
     }
 
-    public Vehicle id(Long id) {
+    public Vehicles id(Long id) {
         this.setId(id);
         return this;
     }
@@ -66,7 +66,7 @@ public class Vehicles implements Serializable {
         return this.make;
     }
 
-    public Vehicle make(String make) {
+    public Vehicles make(String make) {
         this.setMake(make);
         return this;
     }
@@ -79,7 +79,7 @@ public class Vehicles implements Serializable {
         return this.model;
     }
 
-    public Vehicle model(String model) {
+    public Vehicles model(String model) {
         this.setModel(model);
         return this;
     }
@@ -92,7 +92,7 @@ public class Vehicles implements Serializable {
         return this.licenseNumber;
     }
 
-    public Vehicle licenseNumber(String licenseNumber) {
+    public Vehicles licenseNumber(String licenseNumber) {
         this.setLicenseNumber(licenseNumber);
         return this;
     }
@@ -105,7 +105,7 @@ public class Vehicles implements Serializable {
         return this.mileage;
     }
 
-    public Vehicle mileage(Integer mileage) {
+    public Vehicles mileage(Integer mileage) {
         this.setMileage(mileage);
         return this;
     }
@@ -118,7 +118,7 @@ public class Vehicles implements Serializable {
         return this.vehicleYear;
     }
 
-    public Vehicle vehicleYear(Integer vehicleYear) {
+    public Vehicles vehicleYear(Integer vehicleYear) {
         this.setVehicleYear(vehicleYear);
         return this;
     }
@@ -127,28 +127,28 @@ public class Vehicles implements Serializable {
         this.vehicleYear = vehicleYear;
     }
 
-    public Appointment getAppointment() {
+    public Appointments getAppointment() {
         return this.appointment;
     }
 
-    public void setAppointment(Appointment appointment) {
+    public void setAppointment(Appointments appointment) {
         this.appointment = appointment;
     }
 
-    public Vehicle appointment(Appointment appointment) {
+    public Vehicles appointment(Appointments appointment) {
         this.setAppointment(appointment);
         return this;
     }
 
-    public UserProfile getUserProfile() {
+    public User getUserProfile() {
         return this.userProfile;
     }
 
-    public void setUserProfile(UserProfile userProfile) {
+    public void setUserProfile(User userProfile) {
         this.userProfile = userProfile;
     }
 
-    public Vehicle userProfile(UserProfile userProfile) {
+    public Vehicles userProfile(User userProfile) {
         this.setUserProfile(userProfile);
         return this;
     }
@@ -161,10 +161,10 @@ public class Vehicles implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Vehicle)) {
+        if (!(o instanceof Vehicles)) {
             return false;
         }
-        return id != null && id.equals(((Vehicle) o).id);
+        return id != null && id.equals(((Vehicles) o).id);
     }
 
     @Override
