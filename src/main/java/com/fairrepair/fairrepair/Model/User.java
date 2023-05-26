@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  * A user.
  */
 @Entity
-@Table(name = "jhi_user")
+@Table(name = "Users")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User {
 

@@ -7,11 +7,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-/**
- * A Appointment.
- */
 @Entity
-@Table(name = "appointment")
+@Table(name = "Appointments")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Appointments implements Serializable {
@@ -21,18 +18,42 @@ public class Appointments implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
+    @Column(name = "ApptId")
     private Long id;
 
-    @Column(name = "time_slot")
-    private LocalDate timeSlot;
+    @Column(name = "ApptDayTime")
+    private String day;
+
+    // @Column(name = "ApptTime")
+    // private LocalDate time;
+
+    @Column(name = "VehicleID")
+    private Integer vehicleId;
+
+    @Column(name = "UserID")
+    private Integer userId;
+
+    @Column(name = "ShopID")
+    private Integer shopId;
+
+    @Column(name = "ServiceID")
+    private Integer serviceId;
+
+    @ManyToOne
+    private Vehicle vehicle;
+
+    @ManyToOne
+    private User user;
 
     @ManyToOne
     private Shops shop;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "vehicles", "appointments" }, allowSetters = true)
-    private User userProfile;
+    private VehicleService vehicleService;
+
+    // @JsonIgnoreProperties(value = { "user", "vehicles", "appointments" },
+    // allowSetters = true)
+    // private User userProfile;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -50,16 +71,32 @@ public class Appointments implements Serializable {
     }
 
     public LocalDate getTimeSlot() {
-        return this.timeSlot;
+    return this.time;
     }
 
     public Appointments timeSlot(LocalDate timeSlot) {
-        this.setTimeSlot(timeSlot);
-        return this;
+    this.setTimeSlot(timeSlot);
+    return this;
     }
 
-    public void setTimeSlot(LocalDate timeSlot) {
-        this.timeSlot = timeSlot;
+    public void setTimeSlot(LocalDate time) {
+    this.time = time;
+    }
+
+    public Integer getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Integer vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public Shops getShop() {
@@ -76,11 +113,11 @@ public class Appointments implements Serializable {
     }
 
     public User getUserProfile() {
-        return this.userProfile;
+        return this.user;
     }
 
-    public void setUserProfile(User userProfile) {
-        this.userProfile = userProfile;
+    public void setUserProfile(User user) {
+        this.user = user;
     }
 
     public Appointments userProfile(User userProfile) {
@@ -102,19 +139,19 @@ public class Appointments implements Serializable {
         return id != null && id.equals(((Appointments) o).id);
     }
 
-    @Override
-    public int hashCode() {
-        // see
-        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
+    // @Override
+    // public int hashCode() {
+    // // see
+    // //
+    // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+    // return getClass().hashCode();
+    // }
 
     // prettier-ignore
     @Override
     public String toString() {
         return "Appointment{" +
                 "id=" + getId() +
-                ", timeSlot='" + getTimeSlot() + "'" +
                 "}";
     }
 }

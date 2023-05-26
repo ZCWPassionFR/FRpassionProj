@@ -10,33 +10,58 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * A Vehicle.
  */
 @Entity
-@Table(name = "vehicle")
+@Table(name = "Vehicles")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class Vehicles implements Serializable {
+public class Vehicle implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
+    @Column(name = "VehicleID")
     private Long id;
 
-    @Column(name = "make")
+    @Column(name = "VehicleYear")
+    private Integer year;
+
+    @Column(name = "Make")
     private String make;
 
-    @Column(name = "model")
+    @Column(name = "Model")
     private String model;
 
-    @Column(name = "license_number")
-    private String licenseNumber;
+    @Column(name = "Engine")
+    private String engine;
 
-    @Column(name = "mileage")
+    @Column(name = "Color")
+    private String color;
+
+    @Column(name = "Mileage")
     private Integer mileage;
 
-    @Column(name = "vehicle_year")
-    private Integer vehicleYear;
+    @Column(name = "UserID")
+    private Integer userId;
+
+    @Column(name = "VehicleImage")
+    private String vehicleImage;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getVehicleImage() {
+        return vehicleImage;
+    }
+
+    public void setVehicleImage(String vehicleImage) {
+        this.vehicleImage = vehicleImage;
+    }
 
     @JsonIgnoreProperties(value = { "shop", "userProfile" }, allowSetters = true)
     @OneToOne
@@ -53,7 +78,7 @@ public class Vehicles implements Serializable {
         return this.id;
     }
 
-    public Vehicles id(Long id) {
+    public Vehicle id(Long id) {
         this.setId(id);
         return this;
     }
@@ -66,7 +91,7 @@ public class Vehicles implements Serializable {
         return this.make;
     }
 
-    public Vehicles make(String make) {
+    public Vehicle make(String make) {
         this.setMake(make);
         return this;
     }
@@ -79,7 +104,7 @@ public class Vehicles implements Serializable {
         return this.model;
     }
 
-    public Vehicles model(String model) {
+    public Vehicle model(String model) {
         this.setModel(model);
         return this;
     }
@@ -88,24 +113,7 @@ public class Vehicles implements Serializable {
         this.model = model;
     }
 
-    public String getLicenseNumber() {
-        return this.licenseNumber;
-    }
-
-    public Vehicles licenseNumber(String licenseNumber) {
-        this.setLicenseNumber(licenseNumber);
-        return this;
-    }
-
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
-    }
-
-    public Integer getMileage() {
-        return this.mileage;
-    }
-
-    public Vehicles mileage(Integer mileage) {
+    public Vehicle mileage(Integer mileage) {
         this.setMileage(mileage);
         return this;
     }
@@ -114,17 +122,21 @@ public class Vehicles implements Serializable {
         this.mileage = mileage;
     }
 
-    public Integer getVehicleYear() {
-        return this.vehicleYear;
+    private String getMileage() {
+        return null;
     }
 
-    public Vehicles vehicleYear(Integer vehicleYear) {
+    public Integer getVehicleYear() {
+        return this.year;
+    }
+
+    public Vehicle vehicleYear(Integer vehicleYear) {
         this.setVehicleYear(vehicleYear);
         return this;
     }
 
     public void setVehicleYear(Integer vehicleYear) {
-        this.vehicleYear = vehicleYear;
+        this.year = vehicleYear;
     }
 
     public Appointments getAppointment() {
@@ -135,7 +147,7 @@ public class Vehicles implements Serializable {
         this.appointment = appointment;
     }
 
-    public Vehicles appointment(Appointments appointment) {
+    public Vehicle appointment(Appointments appointment) {
         this.setAppointment(appointment);
         return this;
     }
@@ -148,7 +160,7 @@ public class Vehicles implements Serializable {
         this.userProfile = userProfile;
     }
 
-    public Vehicles userProfile(User userProfile) {
+    public Vehicle userProfile(User userProfile) {
         this.setUserProfile(userProfile);
         return this;
     }
@@ -161,10 +173,10 @@ public class Vehicles implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Vehicles)) {
+        if (!(o instanceof Vehicle)) {
             return false;
         }
-        return id != null && id.equals(((Vehicles) o).id);
+        return id != null && id.equals(((Vehicle) o).id);
     }
 
     @Override
@@ -181,9 +193,9 @@ public class Vehicles implements Serializable {
                 "id=" + getId() +
                 ", make='" + getMake() + "'" +
                 ", model='" + getModel() + "'" +
-                ", licenseNumber='" + getLicenseNumber() + "'" +
                 ", mileage=" + getMileage() +
                 ", vehicleYear=" + getVehicleYear() +
                 "}";
     }
+
 }

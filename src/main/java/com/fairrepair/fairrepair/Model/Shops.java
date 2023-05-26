@@ -9,34 +9,35 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * A Shop.
  */
 @Entity
-@Table(name = "shop")
+@Table(name = "Shops")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Shops {
 
-    private static final long serialVersionUID = 1L;
+    // private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
+    @Column(name = "ShopID")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "Name")
     private String name;
 
-    @Column(name = "phone_number")
+    @Column(name = "Address")
     private String phoneNumber;
 
-    @Column(name = "address")
+    @Column(name = "City")
     private String address;
 
-    @Column(name = "fair_repair_rating")
+    @Column(name = "State")
     private Integer fairRepairRating;
 
-    @Column(name = "services")
-    private VehicleService services;
+    @Column(name = "Zip")
+    private Integer zip;
 
+    // private VehicleService services;
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
