@@ -3,7 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+/Users/james/Projects/week 9/fairrepair/src/main/resources/env.properties
+src/main/resources/env.properties
 ### STS ###
 .apt_generated
 .classpath
