@@ -37,7 +37,7 @@ public class Shops {
     @Column(name = "Zip")
     private Integer zip;
 
-    // private VehicleService services;
+    private VehicleService services;
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {

@@ -22,7 +22,7 @@ public class Appointments implements Serializable {
     private Long id;
 
     @Column(name = "ApptDayTime")
-    private String day;
+    private LocalDate date;
 
     // @Column(name = "ApptTime")
     // private LocalDate time;
@@ -71,16 +71,16 @@ public class Appointments implements Serializable {
     }
 
     public LocalDate getTimeSlot() {
-    return this.time;
+        return this.date;
     }
 
     public Appointments timeSlot(LocalDate timeSlot) {
-    this.setTimeSlot(timeSlot);
-    return this;
+        this.setTimeSlot(timeSlot);
+        return this;
     }
 
-    public void setTimeSlot(LocalDate time) {
-    this.time = time;
+    public void setTimeSlot(LocalDate date) {
+        this.date = date;
     }
 
     public Integer getVehicleId() {
@@ -91,13 +91,13 @@ public class Appointments implements Serializable {
         this.vehicleId = vehicleId;
     }
 
-    public String getDay() {
-        return day;
-    }
+    // public String getDay() {
+    // return day;
+    // }
 
-    public void setDay(String day) {
-        this.day = day;
-    }
+    // public void setDay(String day) {
+    // this.day = day;
+    // }
 
     public Shops getShop() {
         return this.shop;
