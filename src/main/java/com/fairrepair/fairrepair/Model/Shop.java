@@ -12,7 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "Shops")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class Shops {
+public class Shop {
 
     // private static final long serialVersionUID = 1L;
 
@@ -44,7 +44,7 @@ public class Shops {
         return this.id;
     }
 
-    public Shops id(Long id) {
+    public Shop id(Long id) {
         this.setId(id);
         return this;
     }
@@ -57,7 +57,7 @@ public class Shops {
         return this.name;
     }
 
-    public Shops name(String name) {
+    public Shop name(String name) {
         this.setName(name);
         return this;
     }
@@ -70,7 +70,7 @@ public class Shops {
         return this.phoneNumber;
     }
 
-    public Shops phoneNumber(String phoneNumber) {
+    public Shop phoneNumber(String phoneNumber) {
         this.setPhoneNumber(phoneNumber);
         return this;
     }
@@ -83,7 +83,7 @@ public class Shops {
         return this.address;
     }
 
-    public Shops address(String address) {
+    public Shop address(String address) {
         this.setAddress(address);
         return this;
     }
@@ -96,7 +96,7 @@ public class Shops {
         return this.fairRepairRating;
     }
 
-    public Shops fairRepairRating(Integer fairRepairRating) {
+    public Shop fairRepairRating(Integer fairRepairRating) {
         this.setFairRepairRating(fairRepairRating);
         return this;
     }
@@ -109,7 +109,7 @@ public class Shops {
         return this.services;
     }
 
-    public Shops services(VehicleService services) {
+    public Shop services(VehicleService services) {
         this.setServices(services);
         return this;
     }
@@ -127,10 +127,10 @@ public class Shops {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Shops)) {
+        if (!(o instanceof Shop)) {
             return false;
         }
-        return id != null && id.equals(((Shops) o).id);
+        return id != null && id.equals(((Shop) o).id);
     }
 
     // @Override
