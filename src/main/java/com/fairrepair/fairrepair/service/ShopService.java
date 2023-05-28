@@ -3,10 +3,12 @@ package com.fairrepair.fairrepair.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fairrepair.fairrepair.model.Shop;
 import com.fairrepair.fairrepair.repository.ShopRepo;
 
+@Service
 public class ShopService {
 
     @Autowired

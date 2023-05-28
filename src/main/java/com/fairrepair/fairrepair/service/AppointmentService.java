@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import com.fairrepair.fairrepair.model.Appointments;
 import com.fairrepair.fairrepair.repository.AppointmentsRepo;
 
+@Service
 public class AppointmentService {
 
     @Autowired
