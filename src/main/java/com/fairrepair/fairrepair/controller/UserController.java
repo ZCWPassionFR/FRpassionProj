@@ -3,7 +3,7 @@ package com.fairrepair.fairrepair.controller;
 import com.fairrepair.fairrepair.config.Constants;
 import com.fairrepair.fairrepair.model.User;
 import com.fairrepair.fairrepair.service.UserService;
-// import com.zcpassionfr.service.dto.AdminUserDTO;
+import com.fairrepair.fairrepair.dto.UserDTO;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -28,19 +28,20 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/api/admin")
 public class UserController {
 
-    private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
-            Arrays.asList(
-                    "id",
-                    "login",
-                    "firstName",
-                    "lastName",
-                    "email",
-                    "activated",
-                    "langKey",
-                    "createdBy",
-                    "createdDate",
-                    "lastModifiedBy",
-                    "lastModifiedDate"));
+    // private static final List<String> ALLOWED_ORDERED_PROPERTIES =
+    // Collections.unmodifiableList(
+    // Arrays.asList(
+    // "id",
+    // "login",
+    // "firstName",
+    // "lastName",
+    // "email",
+    // "activated",
+    // "langKey",
+    // "createdBy",
+    // "createdDate",
+    // "lastModifiedBy",
+    // "lastModifiedDate"));
 
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
@@ -53,61 +54,18 @@ public class UserController {
     // @Autowired
     // private final UserRepository userRepository;
 
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userRepository = userRepository;
+        // this.userRepository = userRepository;
     }
 
-    /**
-     * {@code POST  /admin/users} : Creates a new user.
-     * <p>
-     * Creates a new user if the login and email are not already used, and sends an
-     * mail with an activation link.
-     * The user needs to be activated on creation.
-     *
-     * @param userDTO the user to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
-     *         body the new user, or with status {@code 400 (Bad Request)} if the
-     *         login or email is already in use.
-     * @throws URISyntaxException       if the Location URI syntax is incorrect.
-     * @throws BadRequestAlertException {@code 400 (Bad Request)} if the login or
-     *                                  email is already in use.
-     */
     @PostMapping("/users")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<User> createUser(@Valid @RequestBody AdminUserDTO userDTO) throws URISyntaxException {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
         log.debug("REST request to save User : {}", userDTO);
-
-        if (userDTO.getId() != null) {
-            throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
-            // Lowercase the user login before comparing with database
-        } else if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {
-            throw new LoginAlreadyUsedException();
-        } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
-            throw new EmailAlreadyUsedException();
-        } else {
-            User newUser = userService.createUser(userDTO);
-            mailService.sendCreationEmail(newUser);
-            return ResponseEntity
-                    .created(new URI("/api/admin/users/" + newUser.getLogin()))
-                    .headers(
-                            HeaderUtil.createAlert(applicationName,
-                                    "A user is created with identifier " + newUser.getLogin(), newUser.getLogin()))
-                    .body(newUser);
-        }
+        User newUser = userService.save(userDTO);
+        return ResponseEntity.ok().body(newUser);
     }
 
-    /**
-     * {@code PUT /admin/users} : Updates an existing User.
-     *
-     * @param userDTO the user to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-     *         the updated user.
-     * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is
-     *                                   already in use.
-     * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is
-     *                                   already in use.
-     */
     @PutMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<AdminUserDTO> updateUser(@Valid @RequestBody AdminUserDTO userDTO) {

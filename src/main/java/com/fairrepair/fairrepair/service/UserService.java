@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.fairrepair.fairrepair.dto.UserDTO;
 import com.fairrepair.fairrepair.model.User;
 import com.fairrepair.fairrepair.repository.UserRepo;
 
@@ -17,7 +19,7 @@ public class UserService {
         return (List<User>) userRepo.findAll();
     }
 
-    public User save(User user) {
+    public User save(UserDTO user) {
         return userRepo.save(user);
     }
 
@@ -28,4 +30,7 @@ public class UserService {
     public void deleteById(Long id) {
         userRepo.deleteById(id);
     }
+    // public void save(UserDTO userDto){
+    // userRepo.save(userDto);
+    // }
 }
