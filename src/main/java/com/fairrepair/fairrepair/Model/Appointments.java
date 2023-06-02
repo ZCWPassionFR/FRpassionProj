@@ -46,7 +46,7 @@ public class Appointments implements Serializable {
     private User user;
 
     @ManyToOne
-    private Shops shop;
+    private Shop shop;
 
     @ManyToOne
     private VehicleService vehicleService;
@@ -99,15 +99,15 @@ public class Appointments implements Serializable {
     // this.day = day;
     // }
 
-    public Shops getShop() {
+    public Shop getShop() {
         return this.shop;
     }
 
-    public void setShop(Shops shop) {
+    public void setShop(Shop shop) {
         this.shop = shop;
     }
 
-    public Appointments shop(Shops shop) {
+    public Appointments shop(Shop shop) {
         this.setShop(shop);
         return this;
     }
