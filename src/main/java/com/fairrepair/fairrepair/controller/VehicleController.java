@@ -47,15 +47,8 @@ public class VehicleController {
     @PostMapping("/vehicles")
     public ResponseEntity<Vehicle> createVehicle(@RequestBody Vehicle vehicle) throws URISyntaxException {
         log.debug("REST request to save Vehicle : {}", vehicle);
-        if (vehicle.getId() != null) {
-            throw new BadRequestAlertException("A new vehicle cannot already have an ID", ENTITY_NAME, "idexists");
-        }
         Vehicle result = vehiclesRepo.save(vehicle);
-        return ResponseEntity
-                .created(new URI("/api/vehicles/" + result.getId()))
-                .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME,
-                        result.getId().toString()))
-                .body(result);
+        return ResponseEntity.ok(result);
     }
 
     /**
