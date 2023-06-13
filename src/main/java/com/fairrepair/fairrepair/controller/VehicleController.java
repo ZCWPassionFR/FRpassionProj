@@ -2,6 +2,8 @@ package com.fairrepair.fairrepair.controller;
 
 import com.fairrepair.fairrepair.model.Vehicle;
 import com.fairrepair.fairrepair.repository.VehiclesRepo;
+import com.fairrepair.fairrepair.service.VehicleServ;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -26,10 +28,10 @@ public class VehicleController {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final VehiclesRepo vehiclesRepo;
+    private final VehicleServ vehicleServ;
 
-    public VehicleController(VehiclesRepo vehiclesRepo) {
-        this.vehiclesRepo = vehiclesRepo;
+    public VehicleController(VehicleServ vehicleServ) {
+        this.vehicleServ = vehicleServ;
     }
 
     /**
@@ -38,7 +40,7 @@ public class VehicleController {
     @PostMapping("/vehicles")
     public ResponseEntity<Vehicle> createVehicle(@RequestBody Vehicle vehicle) throws URISyntaxException {
         log.debug("REST request to save Vehicle : {}", vehicle);
-        Vehicle result = vehiclesRepo.save(vehicle);
+        Vehicle result = vehicleServ.save(vehicle);
         return ResponseEntity.ok(result);
     }
 
@@ -50,46 +52,8 @@ public class VehicleController {
             @RequestBody Vehicle vehicle)
             throws URISyntaxException {
         log.debug("REST request to update Vehicle : {}, {}", id, vehicle);
-
-        Vehicle result = vehiclesRepo.save(vehicle);
+        Vehicle result = vehicleServ.save(vehicle);
         return ResponseEntity.ok(result);
-    }
-
-    /**
-     * {@code PATCH  /vehicles/:id} : Partial updates given fields of an existing
-     * vehicle, field will ignore if it is null
-     */
-    @PatchMapping(value = "/vehicles/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<Vehicle> partialUpdateVehicle(
-            @PathVariable(value = "id", required = false) final Long id,
-            @RequestBody Vehicle vehicle) throws URISyntaxException {
-        log.debug("REST request to partial update Vehicle partially : {}, {}", id, vehicle);
-        Optional<Vehicle> result = vehiclesRepo
-                .findById(vehicle.getId())
-                .map(existingVehicle -> {
-                    if (vehicle.getMake() != null) {
-                        existingVehicle.setMake(vehicle.getMake());
-                    }
-                    if (vehicle.getModel() != null) {
-                        existingVehicle.setModel(vehicle.getModel());
-                    }
-                    if (vehicle.getLicenseNumber() != null) {
-                        existingVehicle.setLicenseNumber(vehicle.getLicenseNumber());
-                    }
-                    if (vehicle.getMileage() != null) {
-                        existingVehicle.setMileage(vehicle.getMileage());
-                    }
-                    if (vehicle.getVehicleYear() != null) {
-                        existingVehicle.setVehicleYear(vehicle.getVehicleYear());
-                    }
-
-                    return existingVehicle;
-                })
-                .map(vehiclesRepo::save);
-
-        return ResponseUtil.wrapOrNotFound(
-                result,
-                HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, vehicle.getId().toString()));
     }
 
     /**
@@ -98,7 +62,7 @@ public class VehicleController {
     @GetMapping("/vehicles")
     public List<Vehicle> getAllVehicles() {
         log.debug("REST request to get all Vehicles");
-        return vehiclesRepo.findAll();
+        return vehicleServ.findAll();
     }
 
     /**
@@ -107,8 +71,8 @@ public class VehicleController {
     @GetMapping("/vehicles/{id}")
     public ResponseEntity<Vehicle> getVehicle(@PathVariable Long id) {
         log.debug("REST request to get Vehicle : {}", id);
-        Optional<Vehicle> vehicle = vehiclesRepo.findById(id);
-        return ResponseUtil.wrapOrNotFound(vehicle);
+        Optional<Vehicle> vehicle = vehicleServ.findById(id);
+        return ResponseEntity.ok(vehicle.get());
     }
 
     /**
@@ -117,10 +81,8 @@ public class VehicleController {
     @DeleteMapping("/vehicles/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id) {
         log.debug("REST request to delete Vehicle : {}", id);
-        vehiclesRepo.deleteById(id);
-        return ResponseEntity
-                .noContent()
-                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-                .build();
+        vehicleServ.deleteById(id);
+        return ResponseEntity.noContent().build();
+        // creates 204 No content status code
     }
 }
