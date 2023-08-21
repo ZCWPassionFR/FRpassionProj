@@ -1,6 +1,6 @@
 package com.fairrepair.fairrepair.controller;
 
-import com.fairrepair.fairrepair.model.Appointments;
+import com.fairrepair.fairrepair.Model.Appointments;
 import com.fairrepair.fairrepair.service.AppointmentService;
 
 import java.net.URI;

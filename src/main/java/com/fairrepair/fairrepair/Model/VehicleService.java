@@ -1,4 +1,4 @@
-package com.fairrepair.fairrepair.model;
+package com.fairrepair.fairrepair.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,6 +1,6 @@
 package com.fairrepair.fairrepair.controller;
 
-import com.fairrepair.fairrepair.model.Vehicle;
+import com.fairrepair.fairrepair.Model.Vehicle;
 import com.fairrepair.fairrepair.repository.VehiclesRepo;
 import com.fairrepair.fairrepair.service.VehicleServ;
 

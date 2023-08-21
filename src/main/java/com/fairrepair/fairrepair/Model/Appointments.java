@@ -1,4 +1,4 @@
-package com.fairrepair.fairrepair.model;
+package com.fairrepair.fairrepair.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package com.fairrepair.fairrepair.controller;
 
 import com.fairrepair.fairrepair.config.Constants;
-import com.fairrepair.fairrepair.model.User;
+import com.fairrepair.fairrepair.Model.User;
 import com.fairrepair.fairrepair.service.UserService;
 import com.fairrepair.fairrepair.dto.UserDTO;
 import java.net.URI;
@@ -28,21 +28,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/api/admin")
 public class UserController {
 
-    // private static final List<String> ALLOWED_ORDERED_PROPERTIES =
-    // Collections.unmodifiableList(
-    // Arrays.asList(
-    // "id",
-    // "login",
-    // "firstName",
-    // "lastName",
-    // "email",
-    // "activated",
-    // "langKey",
-    // "createdBy",
-    // "createdDate",
-    // "lastModifiedBy",
-    // "lastModifiedDate"));
-
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Value("${jhipster.clientApp.name}")
@@ -51,30 +36,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // @Autowired
-    // private final UserRepository userRepository;
-
     public UserController(UserService userService) {
         this.userService = userService;
         // this.userRepository = userRepository;
     }
 
+    // @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
-        log.debug("REST request to save User : {}", userDTO);
-        User newUser = userService.save(userDTO);
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) throws URISyntaxException {
+        log.debug("REST request to save User : {}", user);
+        User newUser = userService.save(user);
         // User user = userService.save(user);
         return ResponseEntity.ok().body(newUser);
     }
 
+    // @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/users")
     // @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<AdminUserDTO> updateUser(@Valid @RequestBody AdminUserDTO userDTO) {
-        log.debug("REST request to update User : {}", userDTO);
-        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
-        existingUser = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());
-        Optional<AdminUserDTO> updatedUser = userService.updateUser(userDTO);
-
+    public ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
+        log.debug("REST request to update User : {}", user);
+        // Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(user.getEmail());
+        // existingUser = userRepository.findOneByLogin(user.getLogin().toLowerCase());
+        @Valid User updatedUser = userService.updateUser(user);
         return ResponseEntity.ok(updatedUser);
     }
 
@@ -87,17 +70,9 @@ public class UserController {
      *         all users.
      */
     @GetMapping("/users")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<List<AdminUserDTO>> getAllUsers(
-            @org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<User>> getAllUsers() {
         log.debug("REST request to get all User for an admin");
-        if (!onlyContainsAllowedProperties(pageable)) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        final Page<AdminUserDTO> page = userService.getAllManagedUsers(pageable);
-        HttpHeaders headers = PaginationUtil
-                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
@@ -113,8 +88,7 @@ public class UserController {
      *         the "login" user, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/users/{login}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<AdminUserDTO> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
+    public ResponseEntity<User> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
         log.debug("REST request to get User : {}", login);
         return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
     }

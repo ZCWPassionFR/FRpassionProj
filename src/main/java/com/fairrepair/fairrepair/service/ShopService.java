@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fairrepair.fairrepair.model.Shop;
+import com.fairrepair.fairrepair.Model.Shop;
 import com.fairrepair.fairrepair.repository.ShopRepo;
 
 @Service

@@ -1,6 +1,6 @@
 package com.fairrepair.fairrepair.controller;
 
-import com.fairrepair.fairrepair.model.Shop;
+import com.fairrepair.fairrepair.Model.Shop;
 import com.fairrepair.fairrepair.service.ShopService;
 
 import java.net.URI;

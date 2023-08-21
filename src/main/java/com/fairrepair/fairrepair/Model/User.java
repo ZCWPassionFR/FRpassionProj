@@ -1,4 +1,4 @@
-package com.fairrepair.fairrepair.model;
+package com.fairrepair.fairrepair.Model;
 
 import com.fairrepair.fairrepair.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
