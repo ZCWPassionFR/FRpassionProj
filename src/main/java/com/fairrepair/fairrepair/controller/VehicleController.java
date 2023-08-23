@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +24,9 @@ public class VehicleController {
 
     private final Logger log = LoggerFactory.getLogger(VehicleController.class);
 
-    private static final String ENTITY_NAME = "vehicle";
+    // private static final String ENTITY_NAME = "vehicle";
 
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
-
+    @Autowired
     private final VehicleServ vehicleServ;
 
     public VehicleController(VehicleServ vehicleServ) {

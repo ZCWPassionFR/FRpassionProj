@@ -20,18 +20,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api/admin")
 public class UserController {
 
     private final Logger log = LoggerFactory.getLogger(UserController.class);
-
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
 
     @Autowired
     private UserService userService;

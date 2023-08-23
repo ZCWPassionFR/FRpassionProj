@@ -34,9 +34,6 @@ public class UserService {
     public void deleteById(Long id) {
         userRepo.deleteById(id);
     }
-    // public void save(UserDTO userDto){
-    // userRepo.save(userDto);
-    // }
 
 
     public @Valid User updateUser(@Valid User user) {
